@@ -20,6 +20,10 @@
             @keyup.enter="searchItem"
         >
         <button @click="searchItem" class="search"><i class="fas fa-search"></i></button>
+        <select v-model='language' class="select-languages">
+            <option v-for="language in languages">{{ language.alpha2 }}</option>
+        </select>
+
         <p class="films-list">Film</p>
         <ul class="results-list">
             <li v-for="film in films">

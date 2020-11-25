@@ -3,7 +3,17 @@ const app = new Vue({
     data: {
         inputText: '',
         films: [],
-        tvs: []
+        tvs: [],
+        language: '',
+        languages: []
+    },
+    created() {
+        axios.get('https://pkgstore.datahub.io/core/language-codes/language-codes_json/data/97607046542b532c395cf83df5185246/language-codes_json.json')
+        .then(response => {
+            this.languages = response.data
+            console.log(this.languages);
+        })
+        .catch(error => { console.log(error)})
     },
     methods: {
         searchItem() {
@@ -12,6 +22,7 @@ const app = new Vue({
                     params: {
                         api_key: '7ce64d05ee459f4b7de455e40f7bea40',
                         query: this.inputText,
+                        language: this.language
                     }
                 })
                 .then(response => {
@@ -23,6 +34,7 @@ const app = new Vue({
                     params: {
                         api_key: '7ce64d05ee459f4b7de455e40f7bea40',
                         query: this.inputText,
+                        language: this.language
                     }
                 })
                 .then(response => {
