@@ -13,14 +13,19 @@
 <body>
 
     <div id="app">
-        <input type="text">
-        <button class="search"><i class="fas fa-search"></i></button>
+        <input 
+            type="text"
+            placeholder="Cerca un Film o una Serie TV"
+            v-model="inputText"
+            @keyup.enter="searchItem"
+        >
+        <button @click="searchItem" class="search"><i class="fas fa-search"></i></button>
         <ul class="results-list">
-            <li>
-                <h1 class="title">Titolo</h1>
-                <h2 class="original-title">Titolo Originale</h2>
-                <h3 class="language">Lingua</h3>
-                <h3 class="rating">Voto</h3>
+            <li v-for="film in films">
+                <h1 class="title">{{ film.title }}</h1>
+                <h2 class="original-title">{{ film.original_title }}</h2>
+                <h3 class="language">{{ film.original_language }}</h3>
+                <h3 class="rating">{{ film.vote_average }}</h3>
             </li>
         </ul>
     </div>
