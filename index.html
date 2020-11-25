@@ -20,12 +20,33 @@
             @keyup.enter="searchItem"
         >
         <button @click="searchItem" class="search"><i class="fas fa-search"></i></button>
+        <p class="films-list">Film</p>
         <ul class="results-list">
             <li v-for="film in films">
                 <h1 class="title">{{ film.title }}</h1>
                 <h2 class="original-title">{{ film.original_title }}</h2>
-                <h3 class="language">{{ film.original_language }}</h3>
-                <h3 class="rating">{{ film.vote_average }}</h3>
+                <h3 class="language" v-if="film.original_language === 'it'"><img src="./img/it.png" alt=""></h3>
+                <h3 class="language" v-else-if="film.original_language === 'en'"><img src="./img/en.png" alt=""></h3>
+                <h3 v-else class="language">{{ film.original_language }}</h3>
+                <h3 class="rating">
+                    <i v-for="star in getStars(film.vote_average)" class="fas fa-star"></i>
+                    <i v-for="star in 5 - getStars(film.vote_average)" class="far fa-star"></i>
+                </h3>
+            </li>
+        </ul>
+
+        <p class="tvs-list">Serie TV</p>
+        <ul class="results-list">
+            <li v-for="tv in tvs">
+                <h1 class="title">{{ tv.name }}</h1>
+                <h2 class="original-title">{{ tv.original_name }}</h2>
+                <h3 class="language" v-if="tv.original_language === 'it'"><img src="./img/it.png" alt=""></h3>
+                <h3 class="language" v-else-if="tv.original_language === 'en'"><img src="./img/en.png" alt=""></h3>
+                <h3 v-else class="language">{{ tv.original_language }}</h3>
+                <h3 class="rating">
+                    <i v-for="star in getStars(tv.vote_average)" class="fas fa-star"></i>
+                    <i v-for="star in 5 - getStars(tv.vote_average)" class="far fa-star"></i>
+                </h3>
             </li>
         </ul>
     </div>
