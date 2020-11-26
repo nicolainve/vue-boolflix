@@ -5,15 +5,7 @@ const app = new Vue({
         films: [],
         tvs: [],
         language: '',
-        languages: []
-    },
-    created() {
-        axios.get('https://pkgstore.datahub.io/core/language-codes/language-codes_json/data/97607046542b532c395cf83df5185246/language-codes_json.json')
-        .then(response => {
-            this.languages = response.data
-            console.log(this.languages);
-        })
-        .catch(error => { console.log(error)})
+        languages: ['it', 'en']
     },
     methods: {
         searchItem() {

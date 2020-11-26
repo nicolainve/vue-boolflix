@@ -20,13 +20,16 @@
             @keyup.enter="searchItem"
         >
         <button @click="searchItem" class="search"><i class="fas fa-search"></i></button>
-        <select v-model='language' class="select-languages">
-            <option v-for="language in languages">{{ language.alpha2 }}</option>
+        <select @change="searchItem" v-model='language' class="select-languages">
+            <option value="" selected hidden disabled>lang</option>
+            <option v-for="language in languages">{{ language }}</option>
         </select>
 
         <p class="films-list">Film</p>
         <ul class="results-list">
             <li v-for="film in films">
+                <img v-if="film.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + film.poster_path" alt="" class="cover">
+                <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
                 <h1 class="title">{{ film.title }}</h1>
                 <h2 class="original-title">{{ film.original_title }}</h2>
                 <h3 class="language" v-if="film.original_language === 'it'"><img src="./img/it.png" alt=""></h3>
@@ -42,6 +45,8 @@
         <p class="tvs-list">Serie TV</p>
         <ul class="results-list">
             <li v-for="tv in tvs">
+                <img v-if="tv.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + tv.poster_path" alt="" class="cover">
+                <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
                 <h1 class="title">{{ tv.name }}</h1>
                 <h2 class="original-title">{{ tv.original_name }}</h2>
                 <h3 class="language" v-if="tv.original_language === 'it'"><img src="./img/it.png" alt=""></h3>
