@@ -22,7 +22,7 @@
         <button @click="searchItem" class="search"><i class="fas fa-search"></i></button>
         <select @change="searchItem" v-model='language' class="select-languages">
             <option value="" selected hidden disabled>lang</option>
-            <option v-for="language in languages">{{ language }}</option>
+            <option v-for="flag in flags">{{ flag }}</option>
         </select>
 
         <p class="films-list">Film</p>
@@ -32,8 +32,11 @@
                 <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
                 <h1 class="title">{{ film.title }}</h1>
                 <h2 class="original-title">{{ film.original_title }}</h2>
-                <h3 class="language" v-if="film.original_language === 'it'"><img src="./img/it.png" alt=""></h3>
-                <h3 class="language" v-else-if="film.original_language === 'en'"><img src="./img/en.png" alt=""></h3>
+                <img 
+                    v-if="isLangFlag(film.original_language)"
+                    :src="getFlag(film.original_language)"
+                    :alt="film.original_language"
+                >
                 <h3 v-else class="language">{{ film.original_language }}</h3>
                 <h3 class="rating">
                     <i v-for="star in getStars(film.vote_average)" class="fas fa-star"></i>
@@ -49,8 +52,11 @@
                 <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
                 <h1 class="title">{{ tv.name }}</h1>
                 <h2 class="original-title">{{ tv.original_name }}</h2>
-                <h3 class="language" v-if="tv.original_language === 'it'"><img src="./img/it.png" alt=""></h3>
-                <h3 class="language" v-else-if="tv.original_language === 'en'"><img src="./img/en.png" alt=""></h3>
+                <img 
+                    v-if="isLangFlag(tv.original_language)"
+                    :src="getFlag(tv.original_language)"
+                    :alt="tv.original_language"
+                >
                 <h3 v-else class="language">{{ tv.original_language }}</h3>
                 <h3 class="rating">
                     <i v-for="star in getStars(tv.vote_average)" class="fas fa-star"></i>

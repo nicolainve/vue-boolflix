@@ -5,7 +5,7 @@ const app = new Vue({
         films: [],
         tvs: [],
         language: '',
-        languages: ['it', 'en']
+        flags: ['it', 'en']
     },
     methods: {
         searchItem() {
@@ -37,6 +37,12 @@ const app = new Vue({
         },
         getStars(vote) {
             return Math.ceil(vote / 2)
+        },
+        isLangFlag(lang) {
+            return this.flags.includes(lang)
+        },
+        getFlag(lang) {
+            return `./img/${lang}.png`
         }
     }
 });
