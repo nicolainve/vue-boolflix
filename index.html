@@ -16,7 +16,7 @@
         <input 
             type="text"
             placeholder="Cerca un Film o una Serie TV"
-            v-model="inputText"
+            v-model="query"
             @keyup.enter="searchItem"
         >
         <button @click="searchItem" class="search"><i class="fas fa-search"></i></button>

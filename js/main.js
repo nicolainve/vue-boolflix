@@ -1,7 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
-        inputText: '',
+        query: '',
         films: [],
         tvs: [],
         language: '',
@@ -9,11 +9,13 @@ const app = new Vue({
     },
     methods: {
         searchItem() {
-            if (this.inputText.length > 0) {
+            if (this.query.length > 0) {
+
+                // Movie
                 axios.get('https://api.themoviedb.org/3/search/movie', {
                     params: {
                         api_key: '7ce64d05ee459f4b7de455e40f7bea40',
-                        query: this.inputText,
+                        query: this.query,
                         language: this.language
                     }
                 })
@@ -22,10 +24,11 @@ const app = new Vue({
                 })
                 .catch(error => {console.log(error)});
 
+                // TV
                 axios.get('https://api.themoviedb.org/3/search/tv', {
                     params: {
                         api_key: '7ce64d05ee459f4b7de455e40f7bea40',
-                        query: this.inputText,
+                        query: this.query,
                         language: this.language
                     }
                 })
@@ -35,12 +38,18 @@ const app = new Vue({
                 .catch(error => {console.log(error)});
             }
         },
+
+        // Get stars
         getStars(vote) {
             return Math.ceil(vote / 2)
         },
+
+        // Check Lang
         isLangFlag(lang) {
             return this.flags.includes(lang)
         },
+
+        // Get Flag Image
         getFlag(lang) {
             return `./img/${lang}.png`
         }
