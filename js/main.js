@@ -4,7 +4,6 @@ const app = new Vue({
         query: '',
         films: [],
         tvs: [],
-        language: '',
         flags: ['it', 'en']
     },
     methods: {
@@ -16,7 +15,7 @@ const app = new Vue({
                     params: {
                         api_key: '7ce64d05ee459f4b7de455e40f7bea40',
                         query: this.query,
-                        language: this.language
+                        language: 'it'
                     }
                 })
                 .then(response => {
@@ -29,7 +28,7 @@ const app = new Vue({
                     params: {
                         api_key: '7ce64d05ee459f4b7de455e40f7bea40',
                         query: this.query,
-                        language: this.language
+                        language: 'it'
                     }
                 })
                 .then(response => {

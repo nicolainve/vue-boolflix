@@ -13,57 +13,62 @@
 <body>
 
     <div id="app">
-        <input 
-            type="text"
-            placeholder="Cerca un Film o una Serie TV"
-            v-model="query"
-            @keyup.enter="searchItem"
-        >
-        <button @click="searchItem" class="search"><i class="fas fa-search"></i></button>
-        <select @change="searchItem" v-model='language' class="select-languages">
-            <option value="" selected hidden disabled>lang</option>
-            <option v-for="flag in flags">{{ flag }}</option>
-        </select>
 
-        <p class="films-list">Film</p>
-        <ul class="results-list">
-            <li v-for="film in films">
-                <img v-if="film.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + film.poster_path" alt="" class="cover">
-                <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
-                <h1 class="title">{{ film.title }}</h1>
-                <h2 class="original-title">{{ film.original_title }}</h2>
-                <img 
-                    v-if="isLangFlag(film.original_language)"
-                    :src="getFlag(film.original_language)"
-                    :alt="film.original_language"
+        <!-- Header -->
+        <header class="main-header">
+            <img src="./img/logo.png" alt="Inveflix" class="inveflix-logo">
+            <div class="search">
+                <input 
+                    type="text"
+                    placeholder="Cerca un Film o una Serie TV"
+                    v-model="query"
+                    @keyup.enter="searchItem"
                 >
-                <h3 v-else class="language">{{ film.original_language }}</h3>
-                <h3 class="rating">
-                    <i v-for="star in getStars(film.vote_average)" class="fas fa-star"></i>
-                    <i v-for="star in 5 - getStars(film.vote_average)" class="far fa-star"></i>
-                </h3>
-            </li>
-        </ul>
+                <button @click="searchItem" class="search"><i class="fas fa-search"></i></button>
+            </div>
+        </header>
 
-        <p class="tvs-list">Serie TV</p>
-        <ul class="results-list">
-            <li v-for="tv in tvs">
-                <img v-if="tv.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + tv.poster_path" alt="" class="cover">
-                <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
-                <h1 class="title">{{ tv.name }}</h1>
-                <h2 class="original-title">{{ tv.original_name }}</h2>
-                <img 
-                    v-if="isLangFlag(tv.original_language)"
-                    :src="getFlag(tv.original_language)"
-                    :alt="tv.original_language"
-                >
-                <h3 v-else class="language">{{ tv.original_language }}</h3>
-                <h3 class="rating">
-                    <i v-for="star in getStars(tv.vote_average)" class="fas fa-star"></i>
-                    <i v-for="star in 5 - getStars(tv.vote_average)" class="far fa-star"></i>
-                </h3>
-            </li>
-        </ul>
+        <!-- Main content -->
+        <main class="main-content">
+            
+            <ul class="results-list">
+                <li v-for="film in films">
+                    <img v-if="film.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + film.poster_path" alt="" class="cover">
+                    <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
+                    <h1 class="title">{{ film.title }}</h1>
+                    <h2 class="original-title">{{ film.original_title }}</h2>
+                    <img 
+                        v-if="isLangFlag(film.original_language)"
+                        :src="getFlag(film.original_language)"
+                        :alt="film.original_language"
+                        class="flag"
+                    >
+                    <h3 v-else class="language">{{ film.original_language }}</h3>
+                    <h3 class="rating">
+                        <i v-for="star in getStars(film.vote_average)" class="fas fa-star"></i><i v-for="star in 5 - getStars(film.vote_average)" class="far fa-star"></i>
+                    </h3>
+                </li>
+            </ul>
+    
+            <ul class="results-list">
+                <li v-for="tv in tvs">
+                    <img v-if="tv.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + tv.poster_path" alt="" class="cover">
+                    <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
+                    <h1 class="title">{{ tv.name }}</h1>
+                    <h2 class="original-title">{{ tv.original_name }}</h2>
+                    <img 
+                        v-if="isLangFlag(tv.original_language)"
+                        :src="getFlag(tv.original_language)"
+                        :alt="tv.original_language"
+                        class="flag"
+                    >
+                    <h3 v-else class="language">{{ tv.original_language }}</h3>
+                    <h3 class="rating">
+                        <i v-for="star in getStars(tv.vote_average)" class="fas fa-star"></i><i v-for="star in 5 - getStars(tv.vote_average)" class="far fa-star"></i>
+                    </h3>
+                </li>
+            </ul>
+        </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
