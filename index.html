@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vue-boolflix</title>
+    <title>Boolflix</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
@@ -33,8 +33,11 @@
             
             <ul class="results-list">
                 <li v-for="film in films">
-                    <img v-if="film.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + film.poster_path" alt="" class="cover">
-                    <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
+                    <div class="cover-show">
+                        <img v-if="film.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + film.poster_path" alt="" class="cover">
+                        <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
+                        <div class="layover">{{ film.overview }}</div>
+                    </div>
                     <h1 class="title">{{ film.title }}</h1>
                     <h2 class="original-title">{{ film.original_title }}</h2>
                     <img 
@@ -52,8 +55,11 @@
     
             <ul class="results-list">
                 <li v-for="tv in tvs">
-                    <img v-if="tv.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + tv.poster_path" alt="" class="cover">
-                    <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
+                    <div class="cover-show">
+                        <img v-if="tv.poster_path !== null" :src="'https://image.tmdb.org/t/p/w342/' + tv.poster_path" alt="" class="cover">
+                        <img v-else src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="" class="cover">
+                        <div class="layover">{{ tv.overview }}</div>
+                    </div>
                     <h1 class="title">{{ tv.name }}</h1>
                     <h2 class="original-title">{{ tv.original_name }}</h2>
                     <img 
